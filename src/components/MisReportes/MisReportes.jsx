@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "https://ro-server-55omirja4-leonels-projects-bc6284c9.vercel.app/api/reportes";
+const BASE_URL = import.meta.env.VITE_API_URL + "/reportes";
 
 const MisReportes = () => {
   const [reportes, setReportes] = useState([]);
@@ -13,6 +13,7 @@ const MisReportes = () => {
     const fetchReportes = async () => {
       try {
         const response = await axios.get(BASE_URL);
+        console.log("Respuesta de la API:", response); // Debug
         setReportes(response.data);
       } catch (error) {
         console.error("Error al obtener los reportes:", error);
@@ -78,14 +79,24 @@ const MisReportes = () => {
   return (
     <div>
       <h1>Mis Reportes</h1>
-      {reportes.map((reporte) => (
-        <div key={reporte._id} className="reporte-card">
-          <h2>{reporte.fecha}</h2>
+      {reportes.map((item) => (
+  <div key={item._id} className="reporte-card">
+    <h2>{item.fecha}</h2>
+    {item.reportes.length > 0 ? (
+      item.reportes.map((reporte) => (
+        <div key={reporte._id}>
+          <p>Ubicación: {reporte.ubicacion}</p>
           <button onClick={() => handleViewMore(reporte)}>Ver Más</button>
           <button onClick={() => handleEdit(reporte)}>Editar</button>
           <button onClick={() => handleDelete(reporte._id)}>Eliminar</button>
         </div>
-      ))}
+      ))
+    ) : (
+      <p>No hay reportes para esta fecha.</p>
+    )}
+  </div>
+))}
+
 
       {selectedReporte && (
         <div className="modal">
