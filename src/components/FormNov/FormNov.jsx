@@ -37,7 +37,7 @@ function FormNov() {
     }
   
     try {
-      const response = await fetch("https://ro-server-cwg22ekqg-leonels-projects-bc6284c9.vercel.app/api/reportes", {
+      const response = await fetch("https://ro-server-55omirja4-leonels-projects-bc6284c9.vercel.app/api/reportes", {
         method: "POST",
         body: formData, // No se usa JSON aquí porque incluye archivos
       });
@@ -59,7 +59,7 @@ function FormNov() {
       console.error("Error al enviar el formulario:", error);
     }
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
