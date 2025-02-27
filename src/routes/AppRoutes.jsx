@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import ViewHome from "../views/InicioAdmin/InicioAdmin";
-import FormNov from "../Components/FormNov/FormNov";
-import FormRep from "../components/FormRep/FormRep";
+import ViewHome from "../views/InicioAdmin/InicioAdmin.jsx";
+import FormNov from "../Components/FormNov/FormNov.jsx";
+import FormRep from "../components/FormRep/FormRep.jsx";
 function AppRoutes() {
   return (
     <Routes>
