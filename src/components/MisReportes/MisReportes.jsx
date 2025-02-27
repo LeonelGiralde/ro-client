@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const BASE_URL = import.meta.env.VITE_API_URL + "/reportes";
+const BASE_URL = "https://ro-server-55omirja4-leonels-projects-bc6284c9.vercel.app/api/reportes";
 
 const MisReportes = () => {
   const [reportes, setReportes] = useState([]);
