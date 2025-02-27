@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const BASE_URL = "https://ro-server.vercel.app/api/reportes";
+
 const MisReportes = () => {
   const [reportes, setReportes] = useState([]);
   const [selectedReporte, setSelectedReporte] = useState(null);
@@ -10,10 +12,11 @@ const MisReportes = () => {
   useEffect(() => {
     const fetchReportes = async () => {
       try {
-        const response = await axios.get("https://ro-server-leonels-projects-bc6284c9.vercel.app/api/reportes");
+        const response = await axios.get(BASE_URL);
         setReportes(response.data);
       } catch (error) {
         console.error("Error al obtener los reportes:", error);
+        alert("No se pudieron obtener los reportes. Intenta más tarde.");
       }
     };
     fetchReportes();
@@ -35,22 +38,19 @@ const MisReportes = () => {
     if (!window.confirm("¿Estás seguro de que quieres eliminar este reporte?")) return;
 
     try {
-        const response = await fetch(`https://ro-server-leonels-projects-bc6284c9.vercel.app/api/reportes/${id}`, {
-            method: "DELETE",
-        });
+      const response = await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
 
-        if (!response.ok) {
-            throw new Error("No se pudo eliminar el reporte");
-        }
+      if (!response.ok) {
+        throw new Error("No se pudo eliminar el reporte");
+      }
 
-        alert("Reporte eliminado con éxito");
-        window.location.reload(); // Recargar la lista de reportes
+      setReportes(reportes.filter((reporte) => reporte._id !== id));
+      alert("Reporte eliminado con éxito");
     } catch (error) {
-        console.error("Error al eliminar:", error);
+      console.error("Error al eliminar:", error);
+      alert("No se pudo eliminar el reporte.");
     }
-};
-
-  
+  };
 
   const handleChange = (e) => {
     setSelectedReporte({ ...selectedReporte, [e.target.name]: e.target.value });
@@ -59,10 +59,8 @@ const MisReportes = () => {
   const handleUpdate = async () => {
     if (window.confirm("¿Estás seguro de que deseas guardar los cambios?")) {
       try {
-        await axios.put(
-          `https://ro-server-leonels-projects-bc6284c9.vercel.app/api/reportes/${selectedReporte._id}`,
-          selectedReporte
-        );
+        await axios.put(`${BASE_URL}/${selectedReporte._id}`, selectedReporte);
+
         setReportes(
           reportes.map((r) =>
             r._id === selectedReporte._id ? selectedReporte : r
@@ -72,6 +70,7 @@ const MisReportes = () => {
         setNotification({ message: "Reporte editado con éxito.", type: "success" });
       } catch (error) {
         console.error("Error al actualizar el reporte:", error);
+        alert("No se pudo actualizar el reporte.");
       }
     }
   };
