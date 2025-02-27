@@ -24,22 +24,42 @@ function FormNov() {
     setMedia(event.target.files[0]); // Obtener el archivo subido
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    // Aquí puedes manejar el envío del formulario
-    console.log("Título:", title);
-    console.log("Texto:", text);
-    console.log("Archivo:", media);
-    console.log("Fecha:", date);
-
-    // Resetear el formulario
-    setTitle('');
-    setText('');
-    setMedia(null);
-    setDate(getCurrentDateInArgentina()); // Resetear la fecha
+  
+    // Crear FormData para manejar archivos
+    const formData = new FormData();
+    formData.append("titulo", title);
+    formData.append("texto", text);
+    formData.append("fecha", date);
+    if (media) {
+      formData.append("media", media); // Agregar el archivo solo si existe
+    }
+  
+    try {
+      const response = await fetch("https://ro-server-cwg22ekqg-leonels-projects-bc6284c9.vercel.app/api/reportes", {
+        method: "POST",
+        body: formData, // No se usa JSON aquí porque incluye archivos
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error en la respuesta del servidor");
+      }
+  
+      const data = await response.json();
+      console.log("Respuesta del servidor:", data);
+  
+      // Resetear el formulario solo si la solicitud fue exitosa
+      setTitle('');
+      setText('');
+      setMedia(null);
+      setDate(getCurrentDateInArgentina());
+  
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+    }
   };
-
+  
   return (
     <form onSubmit={handleSubmit}>
       <div>
