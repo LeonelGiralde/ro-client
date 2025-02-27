@@ -59,7 +59,6 @@ function FormNov() {
       console.error("Error al enviar el formulario:", error);
     }
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div>
