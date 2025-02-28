@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./ReporteForm.css";
+import "./FormRep.css";
 
 const ubicaciones = [
   "Mar de Ajo",
