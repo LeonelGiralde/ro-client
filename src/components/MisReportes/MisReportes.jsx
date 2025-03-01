@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { conexionAPI } from "../../conexionAPI";
+import { conexionAPI } from "../../ConexionAPI";
 
 const MisReportes = () => {
   const [reportes, setReportes] = useState([]);
