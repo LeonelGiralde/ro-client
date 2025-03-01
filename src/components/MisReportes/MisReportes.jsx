@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { conexionAPI } from "./conexionAPI"; // Ruta correcta
+import { conexionAPI } from "../../../ConexionAPI"; // Ruta correcta
 
 const MisReportes = () => {
   const [reportes, setReportes] = useState([]);
