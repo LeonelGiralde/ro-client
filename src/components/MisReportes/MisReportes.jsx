@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { conexionAPI } from "../../ConexionAPI";
+import  conexionAPI  from "../../ConexionAPI";
 
 
 const MisReportes = () => {
