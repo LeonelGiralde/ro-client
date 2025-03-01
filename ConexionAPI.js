@@ -41,7 +41,7 @@ async function eliminarReporte(fecha) {
 }
 
 // Exportar las funciones en un objeto
-export const conexionAPI = {
+export const ConexionAPI = {
     listaReportes,
     obtenerReportePorFecha,
     enviarReporte,
