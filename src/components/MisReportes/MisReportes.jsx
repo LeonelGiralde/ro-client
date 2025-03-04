@@ -39,7 +39,6 @@ const Reportes = () => {
           {reporte.reportes.map((detalle, idx) => (
             <div key={idx}>
               <p><strong>Ubicación:</strong> {detalle.ubicacion}</p>
-              <p><strong>Descripción:</strong> {detalle.descripcion}</p>
               <p><strong>Puntuación:</strong> {detalle.puntuacion}</p>
               {/* Agrega otros campos aquí según lo necesites */}
             </div>
