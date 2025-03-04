@@ -5,7 +5,7 @@ const Reportes = () => {
   const [error, setError] = useState(null);      // Estado para errores
 
   useEffect(() => {
-    fetch("https://ro-server-55omirja4-leonels-projects-bc6284c9.vercel.app")
+    fetch("https://ro-server-55omirja4-leonels-projects-bc6284c9.vercel.app/api/reportes") // Petición GET a la API
       .then(response => response.json()) // Convertir respuesta a JSON
       .then(data => setReportes(data))   // Guardar reportes en el estado
       .catch(err => setError(err.message)); // Manejo de errores
