@@ -1,48 +1,24 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
 
 const Reportes = () => {
-  const [reportes, setReportes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [reportes, setReportes] = useState([]);  // Estado para almacenar reportes
+  const [error, setError] = useState(null);      // Estado para errores
 
   useEffect(() => {
-    const fetchReportes = async () => {
-        try {
-            const response = await axios.get('https://ro-server-55omirja4-leonels-projects-bc6284c9.vercel.app/api/reportes');
-            setReportes(response.data);  // Suponiendo que la API devuelve un array de reportes
-            setLoading(false);
-          } catch (error) {
-            setError(`Error al cargar los reportes: ${error.message}`);
-            setLoading(false);
-          }
-          
-    };
-
-    fetchReportes();
+    fetch("https://ro-server-55omirja4-leonels-projects-bc6284c9.vercel.app/api/reportes")
+      .then(response => response.json()) // Convertir respuesta a JSON
+      .then(data => setReportes(data))   // Guardar reportes en el estado
+      .catch(err => setError(err.message)); // Manejo de errores
   }, []);
 
-  if (loading) {
-    return <div>Cargando...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
       <h1>Reportes</h1>
       {reportes.map((reporte, index) => (
         <div key={index}>
-          <h2>Fecha: {new Date(reporte.fecha).toLocaleDateString()}</h2>
-          {reporte.reportes.map((detalle, idx) => (
-            <div key={idx}>
-              <p><strong>Ubicación:</strong> {detalle.ubicacion}</p>
-              <p><strong>Puntuación:</strong> {detalle.puntuacion}</p>
-              {/* Agrega otros campos aquí según lo necesites */}
-            </div>
-          ))}
+          <h2>Fecha: {reporte.fecha}</h2>
         </div>
       ))}
     </div>
