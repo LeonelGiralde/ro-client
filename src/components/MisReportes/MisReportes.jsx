@@ -6,7 +6,7 @@ function Reportes() {
   const [reportes, setReportes] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}/reportes`)
+    fetch(`${API_URL}`)
       .then((response) => response.json())
       .then((data) => setReportes(data))
       .catch((error) => console.error("Error al obtener reportes:", error));
