@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Reportes() {
+  console.log("Componente Reportes montado");
   const [reportes, setReportes] = useState([]);
 
   useEffect(() => {
