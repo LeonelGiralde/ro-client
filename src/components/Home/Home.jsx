@@ -5,10 +5,10 @@ import MisReportes from '../MisReportes/MisReportes';
 function Home() {
     return (
         <div>
-        <h2>Hola! ¿Que vamos a subir hoy? </h2>
-        <ButtonNov/>
-        <ButtonForm/>
-        <MisReportes/>
+            <h2>Hola! ¿Que vamos a subir hoy? </h2>
+            <ButtonNov/>
+            <ButtonForm/>
+            <MisReportes/>
         </div>
     );
 }
